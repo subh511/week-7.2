@@ -36,3 +36,19 @@ export const totalNotificationSelector = selector({
     );
   },
 });
+
+//enclosing with asynchronous data
+
+/**
+ * export const notification = atom({
+ * key:"networkAtom",
+ * default: selector({
+ * key:"networkAtomSelector",
+ * get: async()=>{
+ * await new promise(r=> setTimeout(r,5000))
+ * const res = await axios.get("https://sum-server.100xdevs.com/notification")
+ * return res.data
+ * }
+ * })
+ * })
+ */
