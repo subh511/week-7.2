@@ -10,6 +10,7 @@ import {
   networkAtom,
   notificationAtom,
 } from "./components/store/atom";
+import { useMemo } from "react";
 
 function App() {
   return (
@@ -25,6 +26,26 @@ function Buttons() {
   const notificationAtomCount = useRecoilValue(notificationAtom);
   const messageAtomCount = useRecoilValue(messageAtom);
 
+  // const totalNotification =
+  //   networkNotificationCount +
+  //   jobsAtomCount +
+  //   networkNotificationCount +
+  //   messageAtomCount;
+
+  const totalNotification = useMemo(() => {
+    return (
+      networkNotificationCount +
+      jobsAtomCount +
+      networkNotificationCount +
+      messageAtomCount
+    );
+  }, [
+    networkNotificationCount,
+    jobsAtomCount,
+    networkNotificationCount,
+    messageAtomCount,
+  ]);
+
   return (
     <div>
       <button>Home </button>
@@ -35,24 +56,24 @@ function Buttons() {
       <button>Jobs ({jobsAtomCount})</button>
       <button>Messaging ({messageAtomCount})</button>
       <button>Notification ({notificationAtomCount})</button>
-      <ButtonUpdater />
+      <button>Me ({totalNotification})</button>
     </div>
   );
 }
 
-function ButtonUpdater() {
-  const setMessageAtomCount = useSetRecoilState(messageAtom);
-  return (
-    <div>
-      <button
-        onClick={() => {
-          setMessageAtomCount((count) => count + 1);
-        }}
-      >
-        Me{" "}
-      </button>
-    </div>
-  );
-}
+// function ButtonUpdater() {
+//   const setMessageAtomCount = useSetRecoilState(messageAtom);
+//   return (
+//     <div>
+//       <button
+//         onClick={() => {
+//           setMessageAtomCount((count) => count + 1);
+//         }}
+//       >
+//         Me
+//       </button>
+//     </div>
+//   );
+// }
 
 export default App;
